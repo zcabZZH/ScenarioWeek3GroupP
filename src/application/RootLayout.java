@@ -164,7 +164,7 @@ public class RootLayout extends AnchorPane{
 				event.setDropCompleted(true);
 			}
 		};
-
+		
 		this.setOnDragDone (new EventHandler <DragEvent> (){
 			
 			@Override
@@ -182,107 +182,29 @@ public class RootLayout extends AnchorPane{
 				if (container != null) {
 					if (container.getValue("scene_coords") != null) {
 					
-						DragIcon droppedIcon = new DragIcon();
+						DraggableNode node = new DraggableNode();
 						
-						droppedIcon.setType(DragIconType.valueOf(container.getValue("type")));
-						right_pane.getChildren().add(droppedIcon);
+						node.setType(DragIconType.valueOf(container.getValue("type")));
+						right_pane.getChildren().add(node);
 
 						Point2D cursorPoint = container.getValue("scene_coords");
 
-						droppedIcon.relocateToPoint(
+						node.relocateToPoint(
 								new Point2D(cursorPoint.getX() - 32, cursorPoint.getY() - 32)
 								);
 					}
 				}
-				//System.out.println ((String) event.getDragboard().getContent(DataFormat.PLAIN_TEXT));
-				event.consume();
-			}
-		});
-	}
-	/*
-	public void buildSplitPaneDragHandlers() {
-		
-		//drag detection for widget in the left-hand scroll pane to create a node in the right pane 
-		mWidgetDragDetected = new EventHandler <MouseEvent> () {
-
-			@Override
-			public void handle(MouseEvent event) {
-
-				fs_right_pane.setOnDragDropped(null);
-				fs_root.setOnDragOver(null);
-				fs_right_pane.setOnDragOver(null);
 				
-				fs_right_pane.setOnDragDropped(mRightPaneDragDropped);
-				fs_root.setOnDragOver(mRootDragOver);
+				container = 
+						(DragContainer) event.getDragboard().getContent(DragContainer.DragNode);
 				
-                //begin drag ops
-
-                mDragObject = ((IFileSystemObject) (event.getSource())).getDragObject();
-                
-                if (!fs_root.getChildren().contains((Node)mDragObject))
-                	fs_root.getChildren().add((Node)mDragObject);
-                
-                mDragObject.relocateToPoint(new Point2D (event.getSceneX(), event.getSceneY()));
-                
-                ClipboardContent content = new ClipboardContent();
-                content.putString(mDragObject.getFileSystemType().toString());
-
-                mDragObject.startDragAndDrop (TransferMode.ANY).setContent(content);
-                mDragObject.setVisible(true);
-                
-                event.consume();					
-			}					
-		};
-		
-		//drag over transition to move widget form left pane to right pane
-		mRootDragOver = new EventHandler <DragEvent>() {
-
-			@Override
-			public void handle(DragEvent event) {
-				
-				Point2D p = fs_right_pane.sceneToLocal(event.getSceneX(), event.getSceneY());
-
-				if (!fs_right_pane.boundsInLocalProperty().get().contains(p)) {
-					mDragObject.relocateToPoint(new Point2D(event.getX(), event.getY()));
-					return;
+				if (container != null) {
+					if (container.getValue("type") != null)
+						System.out.println ("Moved node " + container.getValue("type"));
 				}
-
-				fs_root.removeEventHandler(DragEvent.DRAG_OVER, this);
-				fs_right_pane.setOnDragOver(mRightPaneDragOver);
-				event.consume();
-
-			}
-		};
-		
-		//drag over in the right pane
-		mRightPaneDragOver = new EventHandler <DragEvent> () {
-
-			@Override
-			public void handle(DragEvent event) {
-
-				event.acceptTransferModes(TransferMode.ANY);
-				mDragObject.relocateToPoint(mDragObject.getParent().sceneToLocal(new Point2D(event.getSceneX(), event.getSceneY())));
 				
 				event.consume();
 			}
-		};		
-		
-		//drop action in the right pane to create a new node
-		mRightPaneDragDropped = new EventHandler <DragEvent> () {
-
-			@Override
-			public void handle(DragEvent event) {
-				Point2D p = fs_right_pane.sceneToLocal(new Point2D (event.getSceneX(), event.getSceneY()));	
-				
-				self.addFileSystemNode(mDragObject.getFileSystemType(), p);
-				event.setDropCompleted(true);
-
-				fs_right_pane.setOnDragOver(null);
-				fs_right_pane.setOnDragDropped(null);
-				fs_root.setOnDragOver(null);
-				
-				event.consume();
-			}
-		};		
-	}		*/
+		});		
+	}
 }
