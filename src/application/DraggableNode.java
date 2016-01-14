@@ -1,7 +1,6 @@
 package application;
 
 import java.io.IOException;
-<<<<<<< HEAD
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,31 +9,21 @@ import java.util.UUID;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-=======
-
->>>>>>> origin/master
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
-<<<<<<< HEAD
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
-=======
-import javafx.scene.control.Label;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DragEvent;
->>>>>>> origin/master
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 
 public class DraggableNode extends AnchorPane {
 		
-<<<<<<< HEAD
 		@FXML private AnchorPane root_pane;
 		@FXML private AnchorPane left_link_handle;
 		@FXML private AnchorPane right_link_handle;
@@ -46,10 +35,6 @@ public class DraggableNode extends AnchorPane {
 		private EventHandler <DragEvent> mContextLinkDragOver;
 		private EventHandler <DragEvent> mContextLinkDragDropped;
 		
-=======
-		@FXML AnchorPane root_pane;
-
->>>>>>> origin/master
 		private EventHandler <DragEvent> mContextDragOver;
 		private EventHandler <DragEvent> mContextDragDropped;
 		
@@ -57,7 +42,6 @@ public class DraggableNode extends AnchorPane {
 		
 		private Point2D mDragOffset = new Point2D (0.0, 0.0);
 		
-<<<<<<< HEAD
 		private final DraggableNode self;
 		
 		private NodeLink mDragLink = null;
@@ -65,13 +49,6 @@ public class DraggableNode extends AnchorPane {
 
 		private final List <String> mLinkIds = new ArrayList <String> ();
 
-=======
-		@FXML private Label title_bar;
-		@FXML private Label close_button;
-		
-		private final DraggableNode self;
-		
->>>>>>> origin/master
 		public DraggableNode() {
 			
 			FXMLLoader fxmlLoader = new FXMLLoader(
@@ -89,17 +66,13 @@ public class DraggableNode extends AnchorPane {
 			} catch (IOException exception) {
 			    throw new RuntimeException(exception);
 			}
-<<<<<<< HEAD
 			//provide a universally unique identifier for this object
 			setId(UUID.randomUUID().toString());
 
-=======
->>>>>>> origin/master
 		}
 		
 		@FXML
 		private void initialize() {
-<<<<<<< HEAD
 			
 			buildNodeDragHandlers();
 			buildLinkDragHandlers();
@@ -130,11 +103,6 @@ public class DraggableNode extends AnchorPane {
 			mLinkIds.add(linkId);
 		}
 
-=======
-			buildNodeDragHandlers();
-		}
-		
->>>>>>> origin/master
 		public void relocateToPoint (Point2D p) {
 
 			//relocates the object to a point that has been converted to
@@ -200,11 +168,7 @@ public class DraggableNode extends AnchorPane {
 				public void handle(DragEvent event) {		
 			
 					event.acceptTransferModes(TransferMode.ANY);				
-<<<<<<< HEAD
 					relocateToPoint(new Point2dSerial( event.getSceneX(), event.getSceneY()));
-=======
-					relocateToPoint(new Point2D( event.getSceneX(), event.getSceneY()));
->>>>>>> origin/master
 
 					event.consume();
 				}
@@ -224,10 +188,7 @@ public class DraggableNode extends AnchorPane {
 					event.consume();
 				}
 			};
-<<<<<<< HEAD
 			
-=======
->>>>>>> origin/master
 			//close button click
 			close_button.setOnMouseClicked( new EventHandler <MouseEvent> () {
 
@@ -235,7 +196,6 @@ public class DraggableNode extends AnchorPane {
 				public void handle(MouseEvent event) {
 					AnchorPane parent  = (AnchorPane) self.getParent();
 					parent.getChildren().remove(self);
-<<<<<<< HEAD
 
 					//iterate each link id connected to this node
 					//find it's corresponding component in the right-hand
@@ -262,8 +222,6 @@ public class DraggableNode extends AnchorPane {
 						
 						iterId.remove();
 					}
-=======
->>>>>>> origin/master
 				}
 				
 			});
@@ -273,11 +231,7 @@ public class DraggableNode extends AnchorPane {
 
 				@Override
 				public void handle(MouseEvent event) {
-<<<<<<< HEAD
 
-=======
-				
->>>>>>> origin/master
 					getParent().setOnDragOver(null);
 					getParent().setOnDragDropped(null);
 
@@ -303,7 +257,6 @@ public class DraggableNode extends AnchorPane {
 				}
 				
 			});		
-<<<<<<< HEAD
 		}
 		
 		private void buildLinkDragHandlers() {
@@ -421,7 +374,4 @@ public class DraggableNode extends AnchorPane {
 		}
 		
 		
-=======
-		}		
->>>>>>> origin/master
 }
