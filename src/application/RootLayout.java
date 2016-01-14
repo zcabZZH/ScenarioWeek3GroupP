@@ -184,6 +184,7 @@ public class RootLayout extends AnchorPane{
 				if (container != null) {
 					if (container.getValue("scene_coords") != null) {
 					
+<<<<<<< HEAD
 						if (container.getValue("type").equals(DragIconType.cubic_curve.toString())) {
 							CubicCurveDemo curve = new CubicCurveDemo();
 							
@@ -215,10 +216,29 @@ public class RootLayout extends AnchorPane{
 				container = 
 						(DragContainer) event.getDragboard().getContent(DragContainer.DragNode);
 				
+=======
+						DraggableNode node = new DraggableNode();
+						
+						node.setType(DragIconType.valueOf(container.getValue("type")));
+						right_pane.getChildren().add(node);
+
+						Point2D cursorPoint = container.getValue("scene_coords");
+
+						node.relocateToPoint(
+								new Point2D(cursorPoint.getX() - 32, cursorPoint.getY() - 32)
+								);
+					}
+				}
+				
+				container = 
+						(DragContainer) event.getDragboard().getContent(DragContainer.DragNode);
+				
+>>>>>>> origin/master
 				if (container != null) {
 					if (container.getValue("type") != null)
 						System.out.println ("Moved node " + container.getValue("type"));
 				}
+<<<<<<< HEAD
 				*/
 
 				//AddLink drag operation
@@ -261,6 +281,9 @@ public class RootLayout extends AnchorPane{
 						
 				}
 
+=======
+				
+>>>>>>> origin/master
 				event.consume();
 			}
 		});		
