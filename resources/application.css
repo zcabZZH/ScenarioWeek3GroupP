@@ -3,29 +3,29 @@
 }
 
 .icon-blue {
-	-fx-background-color: blue;
+	-fx-background-image: url("led.png");
 }
 
 .icon-red {
-	-fx-background-color: red;
+	-fx-background-image: url("battery.png");
 }
 
 .icon-green {
-	-fx-background-color: green;
+	-fx-background-image: url("switch.png");
 }
 
 .icon-black {
-	-fx-background-color: black;
+	-fx-background-image: url("resistor.png");
 }
 
 .icon-grey {
-	-fx-background-color: grey;
+	-fx-background-image: url("button.png");
 }
 
 .icon-yellow {
-	-fx-background-color: yellow;
+	-fx-background-image: url("multimeter.png");
 }
 
 .icon-purple {
-	-fx-background-color: purple;
+	-fx-background-image: url("bulb.png");
 }

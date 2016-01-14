@@ -194,7 +194,7 @@ public class RootLayout extends AnchorPane{
 								);
 					}
 				}
-
+				//System.out.println ((String) event.getDragboard().getContent(DataFormat.PLAIN_TEXT));
 				event.consume();
 			}
 		});
