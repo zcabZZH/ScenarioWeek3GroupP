@@ -1,6 +1,10 @@
 package application;
 
 import java.io.IOException;
+import java.util.Optional;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import javafx.event.EventHandler;
 import javafx.event.EventType;
@@ -16,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 
 public class RootLayout extends AnchorPane{
 
@@ -163,6 +168,7 @@ public class RootLayout extends AnchorPane{
 				
 				event.getDragboard().setContent(content);
 				event.setDropCompleted(true);
+				
 			}
 		};
 		
@@ -196,6 +202,7 @@ public class RootLayout extends AnchorPane{
 									);							
 						}
 						else {
+							int result=0;
 							
 							DraggableNode node = new DraggableNode();
 							
@@ -207,6 +214,23 @@ public class RootLayout extends AnchorPane{
 							node.relocateToPoint(
 									new Point2D(cursorPoint.getX() - 32, cursorPoint.getY() - 32)
 									);
+							
+							//black resistor
+							//blue LED
+							//green switch
+							//red Voltage source
+							//grey last one
+							//yellow voltmeter
+							//purple ammeter second last one
+							
+							if(node.getType()==DragIconType.black) //resistor 		    
+								result = Integer.parseInt(JOptionPane.showInputDialog("Enter resistance value in Ohms:"));
+							
+							if(node.getType()==DragIconType.red) //voltage source 		    
+								result = Integer.parseInt(JOptionPane.showInputDialog("Enter voltage value in Volts:"));
+							
+							node.setvalue(result);
+							System.out.println(node.getId());
 						}
 					}
 				}

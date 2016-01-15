@@ -22,6 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 
+
 public class DraggableNode extends AnchorPane {
 		
 		@FXML private AnchorPane root_pane;
@@ -29,6 +30,7 @@ public class DraggableNode extends AnchorPane {
 		@FXML private AnchorPane right_link_handle;
 		@FXML private Label title_bar;
 		@FXML private Label close_button;
+	    private int value;
 		
 		private EventHandler <MouseEvent> mLinkHandleDragDetected;
 		private EventHandler <DragEvent> mLinkHandleDragDropped;
@@ -46,6 +48,14 @@ public class DraggableNode extends AnchorPane {
 		
 		private NodeLink mDragLink = null;
 		private AnchorPane right_pane = null;
+		
+		public void setvalue(int value) {
+			this.value=value;
+		}
+		
+		public int getvalue() {
+			return value;
+		}
 
 		private final List <String> mLinkIds = new ArrayList <String> ();
 
@@ -180,6 +190,7 @@ public class DraggableNode extends AnchorPane {
 				@Override
 				public void handle(DragEvent event) {
 				
+				
 					getParent().setOnDragOver(null);
 					getParent().setOnDragDropped(null);
 					
@@ -227,11 +238,12 @@ public class DraggableNode extends AnchorPane {
 			});
 			
 			//drag detection for node dragging
-			title_bar.setOnDragDetected ( new EventHandler <MouseEvent> () {
+			root_pane.setOnDragDetected ( new EventHandler <MouseEvent> () {
 
 				@Override
 				public void handle(MouseEvent event) {
 
+					
 					getParent().setOnDragOver(null);
 					getParent().setOnDragDropped(null);
 
