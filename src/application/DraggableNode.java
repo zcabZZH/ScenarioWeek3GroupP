@@ -30,7 +30,8 @@ public class DraggableNode extends AnchorPane {
 		@FXML private AnchorPane right_link_handle;
 		@FXML private Label title_bar;
 		@FXML private Label close_button;
-	    private int value;
+	    private int resistance;
+	    private int voltage;
 		
 		private EventHandler <MouseEvent> mLinkHandleDragDetected;
 		private EventHandler <DragEvent> mLinkHandleDragDropped;
@@ -49,12 +50,20 @@ public class DraggableNode extends AnchorPane {
 		private NodeLink mDragLink = null;
 		private AnchorPane right_pane = null;
 		
-		public void setvalue(int value) {
-			this.value=value;
+		public void setResistance(int resistance) {
+			this.resistance=resistance;
 		}
 		
-		public int getvalue() {
-			return value;
+		public int getResistance() {
+			return resistance;
+		}
+		
+		public void setVoltage(int voltage) {
+			this.voltage = voltage;
+		}
+		
+		public int getVoltage () {
+			return voltage;
 		}
 
 		private final List <String> mLinkIds = new ArrayList <String> ();

@@ -6,13 +6,17 @@ import java.util.Optional;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextField;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
@@ -28,6 +32,10 @@ public class RootLayout extends AnchorPane{
 	@FXML AnchorPane right_pane;
 	@FXML VBox left_pane;
 
+	private int numberOfNodes=0;
+	private double totalResistance = 0;
+	private double totalVoltage = 0;
+	
 	private DragIcon mDragOverIcon = null;
 	
 	private EventHandler<DragEvent> mIconDragOverRoot = null;
@@ -66,16 +74,42 @@ public class RootLayout extends AnchorPane{
 		//populate left pane with multiple colored icons for testing
 		for (int i = 0; i < 8; i++) {
 			
+			
+			
 			DragIcon icn = new DragIcon();
 			
 			addDragDetection(icn);
 			
 			icn.setType(DragIconType.values()[i]);
 			left_pane.getChildren().add(icn);
+			
 		}
-		
+        
+        TextField textField = new TextField ();
+        right_pane.getChildren().add(textField);
+       // TextField textField1 = new TextField ();
+        //right_pane.getChildren().add(textField1);
+        Label label1 = new Label("I: ");
+        right_pane.getChildren().add(label1);
+        
+        Button btn = new Button();
+        btn.setText("Test");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                textField.setText(calculateCurrent());
+            }
+        });
+        left_pane.getChildren().add(btn);
+        
 		buildDragHandlers();
 	}
+	
+	public String calculateCurrent() {
+		
+		return Double.toString(totalVoltage/totalResistance);
+	}
+	
 	
 	private void addDragDetection(DragIcon dragIcon) {
 		
@@ -206,6 +240,8 @@ public class RootLayout extends AnchorPane{
 							
 							DraggableNode node = new DraggableNode();
 							
+							numberOfNodes++;
+							
 							node.setType(DragIconType.valueOf(container.getValue("type")));
 							right_pane.getChildren().add(node);
 	
@@ -223,14 +259,21 @@ public class RootLayout extends AnchorPane{
 							//yellow voltmeter
 							//purple ammeter second last one
 							
-							if(node.getType()==DragIconType.black) //resistor 		    
+							if(node.getType()==DragIconType.black) //resistor 	
+								{	    
 								result = Integer.parseInt(JOptionPane.showInputDialog("Enter resistance value in Ohms:"));
-							
-							if(node.getType()==DragIconType.red) //voltage source 		    
+							node.setResistance(result);
+							totalResistance = totalResistance + result;
+						}
+						
+							if(node.getType()==DragIconType.red) //voltage source 	
+								{	    
 								result = Integer.parseInt(JOptionPane.showInputDialog("Enter voltage value in Volts:"));
+								node.setVoltage(result);
+								totalVoltage = totalVoltage + result;
+					}
 							
-							node.setvalue(result);
-							System.out.println(node.getId());
+							//System.out.println(node.getId());
 						}
 					}
 				}

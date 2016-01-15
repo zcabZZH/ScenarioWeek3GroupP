@@ -18,23 +18,14 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		BorderPane root = new BorderPane();
-		Label label1 = new Label("Name:");
-		TextField textField = new TextField ();
+		
+		
 		//HBox hb = new HBox();
 		//hb.getChildren().addAll(label1, textField);
 		/*
 		StackPane root1 = new StackPane();
-		 Button btn = new Button();
-		 
-		 
-	        btn.setText("Say 'Hello World'");
-	        btn.setOnAction(new EventHandler<ActionEvent>() {
-	 
-	            @Override
-	            public void handle(ActionEvent event) {
-	                System.out.println("Hello World!");
-	            }
-	        });*/
+	       */
+		
 		
 		try {
 			
